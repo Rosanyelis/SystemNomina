@@ -16,8 +16,9 @@
     ];
 
     $sizes = [
-        'md' => 'min-h-11 rounded-md px-4 text-sm',
-        'sm' => 'min-h-9 rounded-md px-3 text-small',
+        'sm' => 'h-9 rounded-sm px-3 py-2 text-sm',
+        'md' => 'h-10 min-h-11 rounded-sm px-4 py-2 text-sm md:min-h-10',
+        'lg' => 'h-11 min-h-11 rounded-sm px-8 py-2 text-sm',
     ];
 @endphp
 

@@ -13,6 +13,9 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-ink antialiased dark:text-dark-ink">
+        @php
+            $authLogoFormat = request()->routeIs('login', 'register') ? 'png' : 'webp';
+        @endphp
         <div class="relative flex min-h-screen">
             <div class="absolute end-4 top-4 z-50 sm:end-6 sm:top-6">
                 <x-ui.theme-toggle />
@@ -24,8 +27,8 @@
                     <div class="absolute -bottom-32 -start-16 h-80 w-80 rounded-full border border-accent/30"></div>
                 </div>
 
-                <div class="relative">
-                    <x-application-logo variant="full" inverse class="text-white" />
+                <div class="relative flex justify-center">
+                    <x-application-logo variant="full" size="h-32 w-auto" :format="$authLogoFormat" />
                 </div>
 
                 <div class="relative space-y-6">
@@ -47,9 +50,9 @@
             </div>
 
             <div class="flex flex-1 flex-col items-center justify-center bg-background px-4 py-16 dark:bg-dark-background sm:px-6">
-                <div class="mb-8 lg:hidden">
-                    <a href="/" class="rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 dark:focus:ring-offset-dark-background">
-                        <x-application-logo variant="full" class="text-primary dark:text-dark-ink" />
+                <div class="mb-8 flex w-full justify-center lg:hidden">
+                    <a href="/" class="inline-flex rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 dark:focus:ring-offset-dark-background">
+                        <x-application-logo variant="full" :format="$authLogoFormat" />
                     </a>
                 </div>
 

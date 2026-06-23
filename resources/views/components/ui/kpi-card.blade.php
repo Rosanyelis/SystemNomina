@@ -15,15 +15,15 @@
     ];
 @endphp
 
-<div {{ $attributes->merge(['class' => 'rounded-lg bg-surface p-6 shadow-ocmb-md dark:bg-dark-surface']) }}>
-    <div class="flex items-start justify-between gap-4">
+<div {{ $attributes->merge(['class' => 'rounded-lg bg-surface p-5 shadow-ocmb-md dark:bg-dark-surface']) }}>
+    <div class="flex items-start justify-between gap-3">
         <div class="min-w-0 flex-1">
             <p class="text-caption font-medium uppercase tracking-wide text-ink-secondary dark:text-dark-ink/60">
                 {{ $label }}
             </p>
 
             <p @class([
-                'mt-2 font-data text-h4 tabular-nums leading-none',
+                'mt-1.5 font-data text-h4 tabular-nums leading-none',
                 'text-accent' => $highlight,
                 'text-ink dark:text-dark-ink' => ! $highlight,
             ])>
@@ -31,21 +31,21 @@
             </p>
 
             @if ($hint)
-                <p class="mt-2 text-caption text-ink-secondary dark:text-dark-ink/60">
+                <p class="mt-1.5 text-caption text-ink-secondary dark:text-dark-ink/60">
                     {{ $hint }}
                 </p>
             @endif
         </div>
 
         @isset($icon)
-            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-background text-accent dark:bg-dark-background">
+            <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-background text-accent dark:bg-dark-background">
                 {{ $icon }}
             </div>
         @endisset
     </div>
 
     @if ($trend)
-        <p class="mt-4 text-caption {{ $trendVariants[$trendDirection] ?? $trendVariants['neutral'] }}">
+        <p class="mt-3 text-caption {{ $trendVariants[$trendDirection] ?? $trendVariants['neutral'] }}">
             {{ $trend }}
         </p>
     @endif

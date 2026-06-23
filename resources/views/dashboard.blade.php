@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-heading text-h5 text-ink dark:text-dark-ink">
+        <h2 class="font-semibold text-h5 text-ink dark:text-dark-ink">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
@@ -10,7 +10,7 @@
         :description="__('Period :period — consolidated indicators for the selected company.', ['period' => $periodLabel])"
     />
 
-    <div class="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+    <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         @foreach ($kpis as $index => $kpi)
             <x-ui.kpi-card
                 :label="$kpi['label']"
@@ -47,7 +47,7 @@
         @endforeach
     </div>
 
-    <div class="grid grid-cols-1 gap-6 xl:grid-cols-3">
+    <div class="grid grid-cols-1 gap-4 xl:grid-cols-3">
         <x-ui.card class="xl:col-span-2">
             <x-slot name="header">
                 <div class="flex items-center justify-between gap-4">
@@ -117,7 +117,7 @@
                     ['label' => __('INCES'), 'value' => '—'],
                     ['label' => __('Income tax'), 'value' => '—'],
                 ] as $item)
-                    <div class="flex items-center justify-between gap-4 border-b border-border/40 pb-4 last:border-0 last:pb-0 dark:border-white/10">
+                    <div class="flex items-center justify-between gap-4 border-b border-border/40 pb-3 last:border-0 last:pb-0 dark:border-white/10">
                         <dt class="text-sm text-ink-secondary dark:text-dark-ink/70">{{ $item['label'] }}</dt>
                         <dd class="font-data text-sm tabular-nums text-ink dark:text-dark-ink">{{ $item['value'] }}</dd>
                     </div>

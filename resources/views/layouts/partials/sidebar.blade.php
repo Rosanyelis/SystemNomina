@@ -10,16 +10,13 @@
     :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
     class="fixed inset-y-0 start-0 z-40 flex w-64 flex-col bg-primary transition-transform duration-ocmb ease-in-out lg:translate-x-0"
 >
-    <div class="flex h-16 shrink-0 items-center border-b border-white/10 px-6">
-        <a href="{{ route('dashboard') }}" class="rounded-md text-white focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary">
-            <x-application-logo variant="full" inverse class="text-white" />
+    <div class="flex h-16 shrink-0 items-center justify-center border-b border-white/10 px-6">
+        <a href="{{ route('dashboard') }}" class="inline-flex rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary">
+            <x-application-logo variant="full" />
         </a>
     </div>
 
     <nav class="flex-1 space-y-1 overflow-y-auto px-4 py-6" aria-label="{{ __('Main navigation') }}">
-        <p class="mb-3 px-3 text-caption font-medium uppercase tracking-wider text-white/40">
-            {{ __('General') }}
-        </p>
 
         <x-ui.sidebar-nav-link
             :href="route('dashboard')"

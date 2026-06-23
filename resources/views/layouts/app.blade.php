@@ -35,13 +35,13 @@
 
                 @isset($header)
                     <div class="border-b border-border/60 bg-surface dark:border-white/10 dark:bg-dark-surface">
-                        <div class="mx-auto max-w-container px-4 py-6 sm:px-6 lg:px-8">
+                        <div class="mx-auto max-w-container px-4 py-4 sm:px-6 lg:px-8">
                             {{ $header }}
                         </div>
                     </div>
                 @endisset
 
-                <main class="mx-auto max-w-container px-4 py-8 sm:px-6 lg:px-8">
+                <main class="mx-auto max-w-container px-4 py-4 sm:px-6 lg:px-8">
                     {{ $slot }}
                 </main>
             </div>

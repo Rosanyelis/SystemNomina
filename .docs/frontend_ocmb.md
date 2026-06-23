@@ -162,6 +162,14 @@ resources/views/components/ui/
 - [x] Profile partials sin gray/indigo genérico
 - [x] Bordes dark unificados (`dark:border-white/10`)
 
+## Densidad espacial (shadcn-aligned)
+- [x] `ui/form-field` con `space-y-2` (label → input → error)
+- [x] Button md: `h-10 px-4` (44px táctil en móvil, `md:min-h-10`)
+- [x] Input md: `h-10 px-3 py-2` | sm: `h-9 px-2.5`
+- [x] Formularios auth/profile: `space-y-4` entre campos
+- [x] Badge: `px-2.5 py-0.5` | Checkbox: `h-4 w-4`
+- [x] Tablas: `py-2.5` en celdas | KPI cards: `p-5`
+
 ---
 
 # 8. TEMA CLARO / OSCURO

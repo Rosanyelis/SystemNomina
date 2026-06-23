@@ -11,6 +11,6 @@
     ];
 @endphp
 
-<span {{ $attributes->merge(['class' => 'inline-flex items-center rounded-md px-2 py-1 text-caption font-medium '.$variants[$variant]]) }}>
+<span {{ $attributes->merge(['class' => 'inline-flex items-center rounded-md px-2.5 py-0.5 text-caption font-medium '.$variants[$variant]]) }}>
     {{ $slot }}
 </span>

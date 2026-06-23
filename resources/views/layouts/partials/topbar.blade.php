@@ -34,9 +34,9 @@
 
         <x-dropdown align="right" width="48">
             <x-slot name="trigger">
-                <button class="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background px-3 py-2 text-sm font-medium text-ink transition-colors duration-ocmb hover:bg-surface focus:outline-none focus:ring-2 focus:ring-accent dark:border-white/10 dark:bg-dark-background dark:text-dark-ink">
+                <button class="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background px-3 py-2 text-[12px] font-medium text-ink transition-colors duration-ocmb hover:bg-surface focus:outline-none focus:ring-2 focus:ring-accent dark:border-white/10 dark:bg-dark-background dark:text-dark-ink">
                     <span class="hidden max-w-[10rem] truncate sm:inline">{{ Auth::user()->name }}</span>
-                    <span class="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-caption font-semibold text-white">
+                    <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-caption font-semibold text-white">
                         {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                     </span>
                     <svg class="h-4 w-4 text-ink-secondary dark:text-dark-ink/70" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
@@ -47,7 +47,7 @@
 
             <x-slot name="content">
                 <div class="border-b border-border/60 px-4 py-3 dark:border-white/10">
-                    <p class="truncate text-sm font-medium text-ink dark:text-dark-ink">{{ Auth::user()->name }}</p>
+                    <p class="truncate text-[12px] font-medium text-ink dark:text-dark-ink">{{ Auth::user()->name }}</p>
                     <p class="truncate text-caption text-ink-secondary dark:text-dark-ink/70">{{ Auth::user()->email }}</p>
                 </div>
 

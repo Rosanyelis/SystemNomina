@@ -9,13 +9,13 @@
     <form method="POST" action="{{ route('password.email') }}" class="space-y-4">
         @csrf
 
-        <div>
+        <x-ui.form-field>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="mt-1" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+            <x-text-input id="email" type="email" name="email" :value="old('email')" required autofocus />
+            <x-input-error :messages="$errors->get('email')" />
+        </x-ui.form-field>
 
-        <div class="flex justify-end pt-2">
+        <div class="flex justify-end pt-1">
             <x-primary-button>
                 {{ __('Email Password Reset Link') }}
             </x-primary-button>
