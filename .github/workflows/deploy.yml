@@ -51,11 +51,12 @@ jobs:
 
             cd "$PROJECT_PATH"
 
-            if [ ! -d "$PROJECT_PATH/.git" ]; then
+            if [ ! -d .git ]; then
               git init
+            fi
+
+            if ! git remote get-url origin > /dev/null 2>&1; then
               git remote add origin https://github.com/Rosanyelis/SystemNomina.git
-              git fetch origin "$BRANCH"
-              git checkout -f -B "$BRANCH" "origin/$BRANCH"
             fi
 
             git fetch origin "$BRANCH"
