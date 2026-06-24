@@ -50,6 +50,7 @@ jobs:
             BRANCH="${{ secrets.DEPLOY_BRANCH }}"
 
             if [ ! -d "$PROJECT_PATH/.git" ]; then
+              mkdir -p "$PROJECT_PATH"
               cd "$PROJECT_PATH"
               git clone --branch "$BRANCH" https://github.com/Rosanyelis/SystemNomina.git .
             fi
