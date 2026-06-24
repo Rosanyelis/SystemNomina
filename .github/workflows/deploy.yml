@@ -1,0 +1,70 @@
+name: Deploy Sistema de Nomina
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: sistema-nomina
+
+    steps:
+      - name: Comprobar secrets de despliegue
+        env:
+          CONTABO_HOST: ${{ secrets.CONTABO_HOST }}
+          CONTABO_USER: ${{ secrets.CONTABO_USER }}
+          CONTABO_SSH_KEY: ${{ secrets.CONTABO_SSH_KEY }}
+          CLOUDPANEL_PROJECT_PATH: ${{ secrets.CLOUDPANEL_PROJECT_PATH }}
+          DEPLOY_BRANCH: ${{ secrets.DEPLOY_BRANCH }}
+        run: |
+          missing=0
+          if [ -z "$CONTABO_HOST" ]; then echo "::error::Falta CONTABO_HOST en el environment doar (Settings → Environments → doar → Environment secrets)."; missing=1; fi
+          if [ -z "$CONTABO_USER" ]; then echo "::error::Falta CONTABO_USER en el environment doar."; missing=1; fi
+          if [ -z "$CONTABO_SSH_KEY" ]; then echo "::error::Falta CONTABO_SSH_KEY (clave privada PEM completa) en el environment doar."; missing=1; fi
+          if [ -z "$CLOUDPANEL_PROJECT_PATH" ]; then echo "::error::Falta CLOUDPANEL_PROJECT_PATH en el environment doar."; missing=1; fi
+          if [ -z "$DEPLOY_BRANCH" ]; then echo "::error::Falta DEPLOY_BRANCH en el environment doar (ej. main)."; missing=1; fi
+          exit $missing
+
+      - name: Deploy por SSH en Contabo / CloudPanel
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.CONTABO_HOST }}
+          username: ${{ secrets.CONTABO_USER }}
+          key: ${{ secrets.CONTABO_SSH_KEY }}
+          port: ${{ secrets.CONTABO_PORT || '22' }}
+          script_stop: true
+          script: |
+            set -e
+
+            PROJECT_PATH="${{ secrets.CLOUDPANEL_PROJECT_PATH }}"
+            BRANCH="${{ secrets.DEPLOY_BRANCH }}"
+
+            cd "$PROJECT_PATH"
+
+            git fetch origin "$BRANCH"
+            git checkout "$BRANCH"
+            git reset --hard "origin/$BRANCH"
+
+            composer install --prefer-dist --optimize-autoloader --no-interaction
+            php artisan migrate:fresh --force --seed
+
+            rm -rf node_modules
+            npm install
+            npm run build
+
+            php artisan optimize:clear
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+
+            php artisan storage:link
