@@ -1,3 +1,11 @@
+@php
+    $empresaActual = session('empresa_id') ? \App\Models\Empresa::withoutGlobalScopes()->find(session('empresa_id')) : null;
+    $mostrarSelector = auth()->user()->puedeOperarEnContextoTenant();
+    $empresasDisponibles = $mostrarSelector
+        ? \App\Models\Empresa::withoutGlobalScopes()->where('activo', true)->orderBy('razon_social')->get()
+        : collect();
+@endphp
+
 <header class="sticky top-0 z-30 flex h-16 shrink-0 items-center gap-4 border-b border-border/60 bg-surface px-4 shadow-ocmb-sm dark:border-white/10 dark:bg-dark-surface sm:px-6">
     <button
         type="button"
@@ -21,12 +29,21 @@
             </span>
         @endisset
 
-        <div class="hidden items-center gap-2 rounded-md border border-border/60 bg-background px-3 py-1.5 text-caption text-ink-secondary md:flex dark:border-white/10 dark:bg-dark-background dark:text-dark-ink/70">
-            <svg class="h-4 w-4 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
-            </svg>
-            <span>{{ __('No company selected') }}</span>
-        </div>
+        @if ($mostrarSelector)
+            <form method="POST" action="{{ route('seleccionar-empresa') }}" class="flex">
+                @csrf
+                <select name="empresa_id" onchange="this.form.submit()"
+                    class="rounded-md border border-border/60 bg-background px-3 py-1.5 text-caption text-ink-secondary focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent dark:border-white/10 dark:bg-dark-background dark:text-dark-ink/70"
+                >
+                    <option value="">— {{ __('Sin empresa') }} —</option>
+                    @foreach ($empresasDisponibles as $emp)
+                        <option value="{{ $emp->id }}" {{ session('empresa_id') == $emp->id ? 'selected' : '' }}>
+                            {{ $emp->razon_social }}
+                        </option>
+                    @endforeach
+                </select>
+            </form>
+        @endif
     </div>
 
     <div class="flex items-center gap-3">

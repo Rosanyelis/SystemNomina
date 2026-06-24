@@ -7,7 +7,7 @@
 @php
     $src = match (true) {
         $variant !== 'full' => asset('assets/img/isotipo.webp'),
-        $format === 'png' => asset('assets/img/logo.png'),
+        $format === 'png' => asset('assets/img/logo.webp'),
         default => asset('assets/img/logo.webp'),
     };
 @endphp

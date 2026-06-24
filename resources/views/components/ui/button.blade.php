@@ -20,8 +20,16 @@
         'md' => 'h-10 min-h-11 rounded-sm px-4 py-2 text-sm md:min-h-10',
         'lg' => 'h-11 min-h-11 rounded-sm px-8 py-2 text-sm',
     ];
+
+    $class = $base.' '.$variants[$variant].' '.$sizes[$size];
 @endphp
 
-<button type="{{ $type }}" {{ $attributes->merge(['class' => $base.' '.$variants[$variant].' '.$sizes[$size]]) }}>
-    {{ $slot }}
-</button>
+@if ($attributes->has('href') && $type !== 'submit')
+    <a {{ $attributes->merge(['class' => $class]) }}>
+        {{ $slot }}
+    </a>
+@else
+    <button type="{{ $type }}" {{ $attributes->merge(['class' => $class]) }}>
+        {{ $slot }}
+    </button>
+@endif
