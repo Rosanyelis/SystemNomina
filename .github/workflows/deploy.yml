@@ -49,6 +49,11 @@ jobs:
             PROJECT_PATH="${{ secrets.CLOUDPANEL_PROJECT_PATH }}"
             BRANCH="${{ secrets.DEPLOY_BRANCH }}"
 
+            if [ ! -d "$PROJECT_PATH/.git" ]; then
+              mkdir -p "$PROJECT_PATH"
+              git clone --branch "$BRANCH" https://github.com/Rosanyelis/SystemNomina.git "$PROJECT_PATH"
+            fi
+
             cd "$PROJECT_PATH"
 
             git fetch origin "$BRANCH"
