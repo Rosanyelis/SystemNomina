@@ -51,7 +51,7 @@ jobs:
 
             if [ ! -d "$PROJECT_PATH/.git" ]; then
               cd "$PROJECT_PATH"
-              git clone --branch "$BRANCH" https://github.com/Rosanyelis/SystemNomina.git "$PROJECT_PATH"
+              git clone --branch "$BRANCH" https://github.com/Rosanyelis/SystemNomina.git .
             fi
 
             cd "$PROJECT_PATH"
