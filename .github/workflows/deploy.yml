@@ -23,16 +23,16 @@ jobs:
         env:
           CONTABO_HOST: ${{ secrets.CONTABO_HOST }}
           CONTABO_USER: ${{ secrets.CONTABO_USER }}
-          CONTABO_SSH_KEY: ${{ secrets.CONTABO_SSH_KEY }}
+          CONTABO_PASSWORD: ${{ secrets.CONTABO_PASSWORD }}
           CLOUDPANEL_PROJECT_PATH: ${{ secrets.CLOUDPANEL_PROJECT_PATH }}
           DEPLOY_BRANCH: ${{ secrets.DEPLOY_BRANCH }}
         run: |
           missing=0
-          if [ -z "$CONTABO_HOST" ]; then echo "::error::Falta CONTABO_HOST en el environment doar (Settings → Environments → doar → Environment secrets)."; missing=1; fi
-          if [ -z "$CONTABO_USER" ]; then echo "::error::Falta CONTABO_USER en el environment doar."; missing=1; fi
-          if [ -z "$CONTABO_SSH_KEY" ]; then echo "::error::Falta CONTABO_SSH_KEY (clave privada PEM completa) en el environment doar."; missing=1; fi
-          if [ -z "$CLOUDPANEL_PROJECT_PATH" ]; then echo "::error::Falta CLOUDPANEL_PROJECT_PATH en el environment doar."; missing=1; fi
-          if [ -z "$DEPLOY_BRANCH" ]; then echo "::error::Falta DEPLOY_BRANCH en el environment doar (ej. main)."; missing=1; fi
+          if [ -z "$CONTABO_HOST" ]; then echo "::error::Falta CONTABO_HOST en el environment sistema-nomina."; missing=1; fi
+          if [ -z "$CONTABO_USER" ]; then echo "::error::Falta CONTABO_USER en el environment sistema-nomina."; missing=1; fi
+          if [ -z "$CONTABO_PASSWORD" ]; then echo "::error::Falta CONTABO_PASSWORD en el environment sistema-nomina."; missing=1; fi
+          if [ -z "$CLOUDPANEL_PROJECT_PATH" ]; then echo "::error::Falta CLOUDPANEL_PROJECT_PATH en el environment sistema-nomina."; missing=1; fi
+          if [ -z "$DEPLOY_BRANCH" ]; then echo "::error::Falta DEPLOY_BRANCH en el environment sistema-nomina (ej. main)."; missing=1; fi
           exit $missing
 
       - name: Deploy por SSH en Contabo / CloudPanel
@@ -40,7 +40,7 @@ jobs:
         with:
           host: ${{ secrets.CONTABO_HOST }}
           username: ${{ secrets.CONTABO_USER }}
-          key: ${{ secrets.CONTABO_SSH_KEY }}
+          password: ${{ secrets.CONTABO_PASSWORD }}
           port: ${{ secrets.CONTABO_PORT || '22' }}
           script_stop: true
           script: |
