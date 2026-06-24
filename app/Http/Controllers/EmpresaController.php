@@ -75,6 +75,24 @@ class EmpresaController extends Controller
         return redirect()->route('empresas.index')->with('success', 'Empresa actualizada exitosamente.');
     }
 
+    public function toggleActivo(Request $request, Empresa $empresa): RedirectResponse
+    {
+        $this->authorize('empresas.desactivar');
+
+        $empresa->update(['activo' => ! $empresa->activo]);
+
+        $estado = $empresa->activo ? 'activada' : 'desactivada';
+
+        Bitacora::registrar(
+            $request->user(),
+            "{$estado} empresa: {$empresa->razon_social}",
+            Empresa::class,
+            $empresa->id
+        );
+
+        return redirect()->back()->with('success', "Empresa {$estado} exitosamente.");
+    }
+
     public function destroy(Request $request, Empresa $empresa): RedirectResponse
     {
         $this->authorize('empresas.desactivar');

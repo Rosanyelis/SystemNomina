@@ -3,11 +3,6 @@
         <h2 class="font-semibold text-h5 text-ink dark:text-dark-ink">{{ __('Nuevo usuario') }}</h2>
     </x-slot>
 
-    <x-ui.page-header
-        :title="__('Nuevo usuario')"
-        :description="__('Registra un nuevo operador de plataforma con rol asignado.')"
-    />
-
     <x-ui.card>
         <form method="POST" action="{{ route('usuarios.store') }}" class="space-y-6">
             @csrf

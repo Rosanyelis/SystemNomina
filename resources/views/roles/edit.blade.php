@@ -3,11 +3,6 @@
         <h2 class="font-semibold text-h5 text-ink dark:text-dark-ink">{{ __('Editar rol') }}</h2>
     </x-slot>
 
-    <x-ui.page-header
-        :title="__('Editar rol')"
-        :description="__('Actualiza el nombre y los permisos del rol.')"
-    />
-
     <x-ui.card>
         <form method="POST" action="{{ route('roles.update', $role) }}" class="space-y-6">
             @csrf

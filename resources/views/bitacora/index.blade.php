@@ -3,11 +3,6 @@
         <h2 class="font-semibold text-h5 text-ink dark:text-dark-ink">{{ __('Bitácora') }}</h2>
     </x-slot>
 
-    <x-ui.page-header
-        :title="__('Bitácora')"
-        :description="__('Registro de acciones críticas del sistema.')"
-    />
-
     <x-ui.card>
         <form method="GET" action="{{ route('bitacora.index') }}" class="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <x-ui.form-field>

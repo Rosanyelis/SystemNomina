@@ -1,6 +1,5 @@
 <x-app-layout>
     <x-slot name="header"><h2 class="font-semibold text-h5 text-ink dark:text-dark-ink">{{ __('Editar departamento') }}</h2></x-slot>
-    <x-ui.page-header :title="__('Editar departamento')" :description="__('Actualiza el nombre del departamento.')" />
     <x-ui.card>
         <form method="POST" action="{{ route('departamentos.update', $departamento) }}" class="space-y-6">
             @csrf @method('PATCH')

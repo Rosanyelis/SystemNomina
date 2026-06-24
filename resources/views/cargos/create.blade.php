@@ -1,6 +1,5 @@
 <x-app-layout>
     <x-slot name="header"><h2 class="font-semibold text-h5 text-ink dark:text-dark-ink">{{ __('Nuevo cargo') }}</h2></x-slot>
-    <x-ui.page-header :title="__('Nuevo cargo')" :description="__('Registra un nuevo puesto de trabajo.')" />
     <x-ui.card>
         <form method="POST" action="{{ route('cargos.store') }}" class="space-y-6">
             @csrf

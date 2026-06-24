@@ -5,11 +5,6 @@
         </h2>
     </x-slot>
 
-    <x-ui.page-header
-        :title="__('Payroll overview')"
-        :description="__('Period :period — consolidated indicators for the selected company.', ['period' => $periodLabel])"
-    />
-
     <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         @foreach ($kpis as $index => $kpi)
             <x-ui.kpi-card

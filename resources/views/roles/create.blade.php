@@ -3,11 +3,6 @@
         <h2 class="font-semibold text-h5 text-ink dark:text-dark-ink">{{ __('Nuevo rol') }}</h2>
     </x-slot>
 
-    <x-ui.page-header
-        :title="__('Nuevo rol')"
-        :description="__('Crea un nuevo rol y asigna los permisos correspondientes.')"
-    />
-
     <x-ui.card>
         <form method="POST" action="{{ route('roles.store') }}" class="space-y-6">
             @csrf

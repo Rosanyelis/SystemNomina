@@ -3,11 +3,6 @@
         <h2 class="font-semibold text-h5 text-ink dark:text-dark-ink">{{ __('Editar usuario') }}</h2>
     </x-slot>
 
-    <x-ui.page-header
-        :title="__('Editar usuario')"
-        :description="__('Actualiza los datos del operador de plataforma.')"
-    />
-
     <x-ui.card>
         <form method="POST" action="{{ route('usuarios.update', $usuario) }}" class="space-y-6">
             @csrf

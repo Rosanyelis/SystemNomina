@@ -98,6 +98,24 @@ class UsuarioController extends Controller
         return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado exitosamente.');
     }
 
+    public function toggleActivo(Request $request, User $usuario): RedirectResponse
+    {
+        $this->authorize('usuarios.desactivar');
+
+        $usuario->update(['activo' => ! $usuario->activo]);
+
+        $estado = $usuario->activo ? 'activado' : 'desactivado';
+
+        Bitacora::registrar(
+            $request->user(),
+            "{$estado} usuario: {$usuario->email}",
+            User::class,
+            $usuario->id
+        );
+
+        return redirect()->back()->with('success', "Usuario {$estado} exitosamente.");
+    }
+
     public function destroy(Request $request, User $usuario): RedirectResponse
     {
         $this->authorize('usuarios.eliminar');

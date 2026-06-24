@@ -54,4 +54,21 @@ class UsuarioTest extends TestCase
 
         $this->assertDatabaseHas('users', ['email' => 'nuevo.admin@test.com']);
     }
+
+    public function test_admin_can_toggle_usuario_activo(): void
+    {
+        $usuario = User::factory()->create(['activo' => true]);
+
+        $this->actingAs($this->admin)
+            ->post(route('usuarios.toggle-activo', $usuario))
+            ->assertRedirect();
+
+        $this->assertDatabaseHas('users', ['id' => $usuario->id, 'activo' => false]);
+
+        $this->actingAs($this->admin)
+            ->post(route('usuarios.toggle-activo', $usuario))
+            ->assertRedirect();
+
+        $this->assertDatabaseHas('users', ['id' => $usuario->id, 'activo' => true]);
+    }
 }

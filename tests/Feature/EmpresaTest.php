@@ -80,4 +80,21 @@ class EmpresaTest extends TestCase
 
         $this->assertDatabaseHas('empresas', ['id' => $empresa->id, 'activo' => false]);
     }
+
+    public function test_admin_can_toggle_activo_directly(): void
+    {
+        $empresa = Empresa::factory()->create(['activo' => true]);
+
+        $this->actingAs($this->admin)
+            ->post(route('empresas.toggle-activo', $empresa))
+            ->assertRedirect();
+
+        $this->assertDatabaseHas('empresas', ['id' => $empresa->id, 'activo' => false]);
+
+        $this->actingAs($this->admin)
+            ->post(route('empresas.toggle-activo', $empresa))
+            ->assertRedirect();
+
+        $this->assertDatabaseHas('empresas', ['id' => $empresa->id, 'activo' => true]);
+    }
 }

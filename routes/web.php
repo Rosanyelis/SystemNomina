@@ -28,10 +28,13 @@ Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verif
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('empresas', EmpresaController::class);
+    Route::post('empresas/{empresa}/toggle-activo', [EmpresaController::class, 'toggleActivo'])->name('empresas.toggle-activo');
     Route::resource('usuarios', UsuarioController::class)->parameters(['usuarios' => 'usuario']);
+    Route::post('usuarios/{usuario}/toggle-activo', [UsuarioController::class, 'toggleActivo'])->name('usuarios.toggle-activo');
     Route::resource('departamentos', DepartamentoController::class);
     Route::resource('cargos', CargoController::class);
     Route::resource('ciclos-pago', CicloPagoController::class)->parameters(['ciclos-pago' => 'cicloPago']);
+    Route::post('ciclos-pago/{cicloPago}/toggle-activo', [CicloPagoController::class, 'toggleActivo'])->name('ciclos-pago.toggle-activo');
     Route::resource('parametros-legales', ParametroEmpresaController::class)->parameters(['parametros-legales' => 'parametroEmpresa']);
 
     Route::get('/bitacora', [BitacoraController::class, 'index'])->name('bitacora.index');

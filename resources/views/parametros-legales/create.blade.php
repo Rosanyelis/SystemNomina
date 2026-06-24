@@ -1,6 +1,5 @@
 <x-app-layout>
     <x-slot name="header"><h2 class="font-semibold text-h5 text-ink dark:text-dark-ink">{{ __('Nuevos parámetros legales') }}</h2></x-slot>
-    <x-ui.page-header :title="__('Nuevos parámetros legales')" :description="__('Define las tasas y valores legales con fecha de vigencia.')" />
     <x-ui.card>
         <form method="POST" action="{{ route('parametros-legales.store') }}" class="space-y-6">
             @csrf

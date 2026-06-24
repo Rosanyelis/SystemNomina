@@ -50,4 +50,22 @@ class CicloPagoTest extends TestCase
         $this->assertTrue($ciclos->contains('nombre', 'Quincenal'));
         $this->assertTrue($ciclos->contains('nombre', 'Mensual'));
     }
+
+    public function test_rrhh_can_toggle_ciclo_activo(): void
+    {
+        $this->rrhh->givePermissionTo('ciclos-pago.desactivar');
+
+        $ciclo = CicloPago::factory()->create([
+            'empresa_id' => $this->empresa->id,
+            'nombre' => 'Personalizado',
+            'dias' => 10,
+            'activo' => true,
+        ]);
+
+        $this->actingAs($this->rrhh)
+            ->post(route('ciclos-pago.toggle-activo', $ciclo))
+            ->assertRedirect();
+
+        $this->assertDatabaseHas('ciclos_pago', ['id' => $ciclo->id, 'activo' => false]);
+    }
 }

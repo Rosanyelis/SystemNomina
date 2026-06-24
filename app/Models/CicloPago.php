@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Models\Concerns\TenantScoped;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class CicloPago extends Model
 {
-    use TenantScoped;
+    use HasFactory, TenantScoped;
 
     protected $table = 'ciclos_pago';
 

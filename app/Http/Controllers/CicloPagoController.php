@@ -77,6 +77,24 @@ class CicloPagoController extends Controller
         return redirect()->route('ciclos-pago.index')->with('success', 'Ciclo de pago actualizado exitosamente.');
     }
 
+    public function toggleActivo(Request $request, CicloPago $cicloPago): RedirectResponse
+    {
+        $this->authorize('ciclos-pago.desactivar');
+
+        $cicloPago->update(['activo' => ! $cicloPago->activo]);
+
+        $estado = $cicloPago->activo ? 'activado' : 'desactivado';
+
+        Bitacora::registrar(
+            $request->user(),
+            "{$estado} ciclo de pago: {$cicloPago->nombre}",
+            CicloPago::class,
+            $cicloPago->id
+        );
+
+        return redirect()->back()->with('success', "Ciclo de pago {$estado} exitosamente.");
+    }
+
     public function destroy(Request $request, CicloPago $cicloPago): RedirectResponse
     {
         $this->authorize('ciclos-pago.eliminar');

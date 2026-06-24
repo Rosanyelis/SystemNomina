@@ -29,6 +29,7 @@ class RolePermissionSeeder extends Seeder
             'usuarios.crear',
             'usuarios.editar',
             'usuarios.eliminar',
+            'usuarios.desactivar',
 
             'departamentos.listar',
             'departamentos.crear',
@@ -44,6 +45,7 @@ class RolePermissionSeeder extends Seeder
             'ciclos-pago.crear',
             'ciclos-pago.editar',
             'ciclos-pago.eliminar',
+            'ciclos-pago.desactivar',
 
             'parametros-legales.listar',
             'parametros-legales.crear',
@@ -83,6 +85,7 @@ class RolePermissionSeeder extends Seeder
             'ciclos-pago.crear',
             'ciclos-pago.editar',
             'ciclos-pago.eliminar',
+            'ciclos-pago.desactivar',
             'parametros-legales.listar',
             'parametros-legales.crear',
             'parametros-legales.editar',
@@ -102,5 +105,7 @@ class RolePermissionSeeder extends Seeder
             'bitacora.consultar',
             'bitacora.exportar',
         ]);
+
+        app()->make(PermissionRegistrar::class)->forgetCachedPermissions();
     }
 }
