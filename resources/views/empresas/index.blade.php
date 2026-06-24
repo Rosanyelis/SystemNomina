@@ -46,12 +46,16 @@
                                 @endcan
 
                                 @can('empresas.desactivar')
-                                    <form method="POST" action="{{ route('empresas.toggle-activo', $empresa) }}" class="inline">
-                                        @csrf
-                                        <x-ui.button type="submit" variant="ghost" size="sm" title="{{ $empresa->activo ? __('Desactivar registro') : __('Activar registro') }}">
+                                    <x-ui.confirm-modal
+                                        :action="route('empresas.toggle-activo', $empresa)"
+                                        :title="$empresa->activo ? __('¿Desactivar empresa?') : __('¿Activar empresa?')"
+                                        :message="$empresa->activo ? __('¿Está seguro de desactivar la empresa «:razon»?', ['razon' => $empresa->razon_social]) : __('¿Está seguro de activar la empresa «:razon»?', ['razon' => $empresa->razon_social])"
+                                        :confirm-text="$empresa->activo ? __('Desactivar') : __('Activar')"
+                                    >
+                                        <x-ui.button type="button" variant="ghost" size="sm" title="{{ $empresa->activo ? __('Desactivar registro') : __('Activar registro') }}">
                                             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1012.728 0M12 3v9" /></svg>
                                         </x-ui.button>
-                                    </form>
+                                    </x-ui.confirm-modal>
                                 @endcan
                             </div>
                         </x-ui.table.cell>

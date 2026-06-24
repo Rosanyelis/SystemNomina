@@ -50,12 +50,16 @@
                                 @endcan
 
                                 @can('usuarios.desactivar')
-                                    <form method="POST" action="{{ route('usuarios.toggle-activo', $usuario) }}" class="inline">
-                                        @csrf
-                                        <x-ui.button type="submit" variant="ghost" size="sm" title="{{ $usuario->activo ? __('Desactivar registro') : __('Activar registro') }}">
+                                    <x-ui.confirm-modal
+                                        :action="route('usuarios.toggle-activo', $usuario)"
+                                        :title="$usuario->activo ? __('¿Desactivar usuario?') : __('¿Activar usuario?')"
+                                        :message="$usuario->activo ? __('¿Está seguro de desactivar el usuario «:name»?', ['name' => $usuario->name]) : __('¿Está seguro de activar el usuario «:name»?', ['name' => $usuario->name])"
+                                        :confirm-text="$usuario->activo ? __('Desactivar') : __('Activar')"
+                                    >
+                                        <x-ui.button type="button" variant="ghost" size="sm" title="{{ $usuario->activo ? __('Desactivar registro') : __('Activar registro') }}">
                                             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1012.728 0M12 3v9" /></svg>
                                         </x-ui.button>
-                                    </form>
+                                    </x-ui.confirm-modal>
                                 @endcan
                             </div>
                         </x-ui.table.cell>

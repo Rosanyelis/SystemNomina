@@ -13,7 +13,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-ink antialiased dark:text-dark-ink">
-        <div x-data="{ sidebarOpen: false }" class="min-h-screen bg-background dark:bg-dark-background">
+        <div x-data="{ sidebarOpen: false, sidebarCollapsed: localStorage.getItem('sidebarCollapsed') === 'true' }" class="min-h-screen bg-background dark:bg-dark-background">
             <div
                 x-show="sidebarOpen"
                 x-transition:enter="transition-opacity duration-ocmb ease-in-out"
@@ -30,7 +30,7 @@
 
             @include('layouts.partials.sidebar')
 
-            <div class="lg:ps-64">
+            <div class="lg:ps-64" :class="sidebarCollapsed ? 'lg:ps-16' : 'lg:ps-64'">
                 @include('layouts.partials.topbar')
 
                 @isset($header)
