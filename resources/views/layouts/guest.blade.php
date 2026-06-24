@@ -31,6 +31,8 @@
                     <x-application-logo variant="full" size="h-32 w-auto" :format="$authLogoFormat" />
                 </div>
 
+                {{-- TEMPORAL: quote reemplazado por mensaje de bienvenida --}}
+                {{--
                 <div class="relative space-y-6">
                     <blockquote class="font-heading text-h4 leading-snug text-white">
                         {{ __('Financial precision backed by professional trust.') }}
@@ -42,6 +44,12 @@
                         <span class="h-px w-8 bg-accent"></span>
                         <span class="text-caption uppercase tracking-widest text-accent">OCMB</span>
                     </div>
+                </div>
+                --}}
+
+                <div class="relative space-y-4">
+                    <h3 class="font-heading text-h4 leading-snug text-white">{{ __('Bienvenido') }}</h3>
+                    <p class="max-w-sm text-sm leading-relaxed text-white/60">{{ __('Ingrese sus datos de acceso para loguearse.') }}</p>
                 </div>
 
                 <p class="relative text-caption text-white/30">

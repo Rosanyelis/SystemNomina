@@ -1,39 +1,37 @@
-<section>
-    <header class="space-y-1.5">
-        <h2 class="text-lg font-medium text-ink dark:text-dark-ink">
-            {{ __('Update Password') }}
-        </h2>
+<x-ui.card>
+    <x-slot name="header">
+        <h3 class="font-medium text-ink dark:text-dark-ink">{{ __('Update Password') }}</h3>
+        <p class="mt-1 text-caption text-ink-secondary dark:text-dark-ink/70">{{ __('Ensure your account is using a long, random password to stay secure.') }}</p>
+    </x-slot>
 
-        <p class="text-sm text-ink-secondary dark:text-dark-ink/70">
-            {{ __('Ensure your account is using a long, random password to stay secure.') }}
-        </p>
-    </header>
-
-    <form method="post" action="{{ route('password.update') }}" class="mt-4 space-y-4">
+    <form method="post" action="{{ route('password.update') }}" class="space-y-6">
         @csrf
         @method('put')
 
-        <x-ui.form-field>
-            <x-input-label for="update_password_current_password" :value="__('Current Password')" />
-            <x-text-input id="update_password_current_password" name="current_password" type="password" class="block w-full" autocomplete="current-password" />
-            <x-input-error :messages="$errors->updatePassword->get('current_password')" />
-        </x-ui.form-field>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+            
+            <x-ui.form-field>
+                <x-ui.label for="update_password_current_password">{{ __('Current Password') }}</x-ui.label>
+                <x-ui.input id="update_password_current_password" name="current_password" type="password" autocomplete="current-password" />
+                <x-input-error :messages="$errors->updatePassword->get('current_password')" />
+            </x-ui.form-field>
 
-        <x-ui.form-field>
-            <x-input-label for="update_password_password" :value="__('New Password')" />
-            <x-text-input id="update_password_password" name="password" type="password" class="block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password')" />
-        </x-ui.form-field>
+            
+                <x-ui.form-field>
+                    <x-ui.label for="update_password_password">{{ __('New Password') }}</x-ui.label>
+                    <x-ui.input id="update_password_password" name="password" type="password" autocomplete="new-password" />
+                    <x-input-error :messages="$errors->updatePassword->get('password')" />
+                </x-ui.form-field>
 
-        <x-ui.form-field>
-            <x-input-label for="update_password_password_confirmation" :value="__('Confirm Password')" />
-            <x-text-input id="update_password_password_confirmation" name="password_confirmation" type="password" class="block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" />
-        </x-ui.form-field>
+                <x-ui.form-field>
+                    <x-ui.label for="update_password_password_confirmation">{{ __('Confirm Password') }}</x-ui.label>
+                    <x-ui.input id="update_password_password_confirmation" name="password_confirmation" type="password" autocomplete="new-password" />
+                    <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" />
+                </x-ui.form-field>
+            
+        </div>
 
-        <div class="flex items-center gap-3 pt-1">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
-
+        <div class="flex items-center justify-end gap-4">
             @if (session('status') === 'password-updated')
                 <p
                     x-data="{ show: true }"
@@ -43,6 +41,7 @@
                     class="text-sm text-success"
                 >{{ __('Saved.') }}</p>
             @endif
+            <x-ui.button type="submit" variant="primary">{{ __('Save') }}</x-ui.button>
         </div>
     </form>
-</section>
+</x-ui.card>
